@@ -378,7 +378,7 @@ struct ContentView: View {
                     case .tools:
                         ToolsView()
                     case .clipboard:
-                        Text("Clipboard history")
+                        ClipboardHistoryView()
                     case .stats:
                         Text("Performance stats")
                     }
