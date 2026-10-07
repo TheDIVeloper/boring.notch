@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0321BFB88C962E6DF96EC19 /* AppCleanerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */; };
+		5C4BC303E378150FB327A240 /* AppCleanerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3305137C4684C9948106D0C /* AppCleanerManager.swift */; };
 		BABE848200024B980DC9779C /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D444E9D4A9B5C0CA800943C9 /* StatsView.swift */; };
 		55CD7C41F8640CA8BAF2517B /* TimerPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */; };
 		2D6ED8788064044D033F882A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569EE316732A24EE51CA6C /* TimerManager.swift */; };
@@ -190,6 +192,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleanerView.swift; sourceTree = "<group>"; };
+		E3305137C4684C9948106D0C /* AppCleanerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleanerManager.swift; sourceTree = "<group>"; };
 		D444E9D4A9B5C0CA800943C9 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPanelView.swift; sourceTree = "<group>"; };
 		38569EE316732A24EE51CA6C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
@@ -378,6 +382,8 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				E3305137C4684C9948106D0C /* AppCleanerManager.swift */,
+				B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */,
 				D444E9D4A9B5C0CA800943C9 /* StatsView.swift */,
 				38569EE316732A24EE51CA6C /* TimerManager.swift */,
 				8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */,
@@ -1052,6 +1058,8 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				F0321BFB88C962E6DF96EC19 /* AppCleanerView.swift in Sources */,
+				5C4BC303E378150FB327A240 /* AppCleanerManager.swift in Sources */,
 				BABE848200024B980DC9779C /* StatsView.swift in Sources */,
 				55CD7C41F8640CA8BAF2517B /* TimerPanelView.swift in Sources */,
 				2D6ED8788064044D033F882A /* TimerManager.swift in Sources */,

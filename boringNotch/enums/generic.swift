@@ -30,6 +30,7 @@ public enum NotchViews {
     case tools
     case clipboard
     case stats
+    case cleaner
 }
 
 enum SettingsEnum {

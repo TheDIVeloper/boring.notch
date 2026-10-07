@@ -29,6 +29,9 @@ func availableNotchTabs() -> [TabModel] {
     if Defaults[.featurePerformanceStats] {
         list.append(TabModel(label: "Stats", icon: "chart.bar.fill", view: .stats))
     }
+    if Defaults[.featureAppCleaner] {
+        list.append(TabModel(label: "Cleaner", icon: "sparkles", view: .cleaner))
+    }
     return list
 }
 
@@ -37,7 +40,8 @@ struct TabSelectionView: View {
     @Namespace var animation
     var body: some View {
         if availableNotchTabs().count > 1 {
-            HStack(spacing: 0) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
                 ForEach(availableNotchTabs()) { tab in
                     TabButton(label: tab.label, icon: tab.icon, selected: coordinator.currentView == tab.view) {
                         withAnimation(.smooth) {
@@ -63,6 +67,7 @@ struct TabSelectionView: View {
         .clipShape(Capsule())
         }
     }
+}
 }
 
 #Preview {

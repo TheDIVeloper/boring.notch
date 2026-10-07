@@ -1751,10 +1751,13 @@ struct ToolsSettings: View {
                 Defaults.Toggle(key: .showToolsTab) {
                     Text("Show the Tools tab")
                 }
+                Defaults.Toggle(key: .featureAppCleaner) {
+                    Text("App cleaner")
+                }
             } header: {
                 Text("Tabs")
             } footer: {
-                Text("The Tools tab holds the quick utilities below. Clipboard history and performance stats get their own tabs when turned on.")
+                Text("The Tools tab holds the quick utilities below. Clipboard history, performance stats and the app cleaner get their own tabs when turned on.")
             }
 
             Section {

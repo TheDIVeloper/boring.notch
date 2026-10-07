@@ -381,6 +381,8 @@ struct ContentView: View {
                         ClipboardHistoryView()
                     case .stats:
                         StatsView()
+                    case .cleaner:
+                        AppCleanerView()
                     }
                 }
                 .transition(
