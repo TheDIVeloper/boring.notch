@@ -142,6 +142,15 @@ extension Defaults.Keys {
     static let customVisualizers = Key<[CustomVisualizer]>("customVisualizers", default: [])
     static let selectedVisualizer = Key<CustomVisualizer?>("selectedVisualizer", default: nil)
     
+    // MARK: Tools
+    static let showToolsTab = Key<Bool>("showToolsTab", default: true)
+    static let featureDiskEject = Key<Bool>("featureDiskEject", default: true)
+    static let featureCaffeinate = Key<Bool>("featureCaffeinate", default: true)
+    static let featureTimer = Key<Bool>("featureTimer", default: true)
+    static let featureColorPicker = Key<Bool>("featureColorPicker", default: true)
+    static let featureClipboardHistory = Key<Bool>("featureClipboardHistory", default: false)
+    static let featurePerformanceStats = Key<Bool>("featurePerformanceStats", default: false)
+    
     // MARK: Gestures
     static let enableGestures = Key<Bool>("enableGestures", default: true)
     static let closeGestureEnabled = Key<Bool>("closeGestureEnabled", default: true)

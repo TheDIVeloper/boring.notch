@@ -367,11 +367,20 @@ struct ContentView: View {
               .zIndex(2)
             if vm.notchState == .open {
                 VStack {
-                    switch coordinator.currentView {
+                    let activeTab = availableNotchTabs().contains(where: { $0.view == coordinator.currentView })
+                        ? coordinator.currentView
+                        : NotchViews.home
+                    switch activeTab {
                     case .home:
                         NotchHomeView(albumArtNamespace: albumArtNamespace)
                     case .shelf:
                         ShelfView()
+                    case .tools:
+                        ToolsView()
+                    case .clipboard:
+                        Text("Clipboard history")
+                    case .stats:
+                        Text("Performance stats")
                     }
                 }
                 .transition(

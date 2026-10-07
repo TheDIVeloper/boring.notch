@@ -47,6 +47,9 @@ struct SettingsView: View {
                 NavigationLink(value: "Shortcuts") {
                     Label("Shortcuts", systemImage: "keyboard")
                 }
+                NavigationLink(value: "Tools") {
+                    Label("Tools", systemImage: "wrench.and.screwdriver")
+                }
                 // NavigationLink(value: "Extensions") {
                 //     Label("Extensions", systemImage: "puzzlepiece.extension")
                 // }
@@ -80,6 +83,8 @@ struct SettingsView: View {
                     Shelf()
                 case "Shortcuts":
                     Shortcuts()
+                case "Tools":
+                    ToolsSettings()
                 case "Extensions":
                     GeneralSettings()
                 case "Advanced":
@@ -1728,6 +1733,68 @@ func warningBadge(_ text: String, _ description: String) -> some View {
             }
             Spacer()
         }
+    }
+}
+
+struct ToolsSettings: View {
+    @Default(.showToolsTab) var showToolsTab
+    @Default(.featureDiskEject) var featureDiskEject
+    @Default(.featureCaffeinate) var featureCaffeinate
+    @Default(.featureTimer) var featureTimer
+    @Default(.featureColorPicker) var featureColorPicker
+    @Default(.featureClipboardHistory) var featureClipboardHistory
+    @Default(.featurePerformanceStats) var featurePerformanceStats
+
+    var body: some View {
+        Form {
+            Section {
+                Defaults.Toggle(key: .showToolsTab) {
+                    Text("Show the Tools tab")
+                }
+            } header: {
+                Text("Tabs")
+            } footer: {
+                Text("The Tools tab holds the quick utilities below. Clipboard history and performance stats get their own tabs when turned on.")
+            }
+
+            Section {
+                Defaults.Toggle(key: .featureDiskEject) {
+                    Text("Disk eject")
+                }
+                Defaults.Toggle(key: .featureCaffeinate) {
+                    Text("Caffeinate")
+                }
+                Defaults.Toggle(key: .featureTimer) {
+                    Text("Timer and stopwatch")
+                }
+                Defaults.Toggle(key: .featureColorPicker) {
+                    Text("Screen colour picker")
+                }
+            } header: {
+                Text("Tool tiles")
+            }
+
+            Section {
+                Defaults.Toggle(key: .featureClipboardHistory) {
+                    Text("Clipboard history")
+                }
+            } header: {
+                Text("Clipboard")
+            } footer: {
+                Text("Keeps a history of copied items on this Mac. Items marked confidential by other apps are never stored.")
+            }
+
+            Section {
+                Defaults.Toggle(key: .featurePerformanceStats) {
+                    Text("Performance stats")
+                }
+            } header: {
+                Text("Performance")
+            } footer: {
+                Text("Polls CPU, memory and network usage while the Stats tab is open.")
+            }
+        }
+        .navigationTitle("Tools")
     }
 }
 
