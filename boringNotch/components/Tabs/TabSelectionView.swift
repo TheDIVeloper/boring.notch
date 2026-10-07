@@ -32,6 +32,9 @@ func availableNotchTabs() -> [TabModel] {
     if Defaults[.featureAppCleaner] {
         list.append(TabModel(label: "Cleaner", icon: "sparkles", view: .cleaner))
     }
+    if Defaults[.featureTodos] {
+        list.append(TabModel(label: "To-dos", icon: "checklist", view: .todos))
+    }
     return list
 }
 

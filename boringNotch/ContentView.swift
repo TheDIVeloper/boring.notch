@@ -383,6 +383,8 @@ struct ContentView: View {
                         StatsView()
                     case .cleaner:
                         AppCleanerView()
+                    case .todos:
+                        TodoListView()
                     }
                 }
                 .transition(

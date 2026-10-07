@@ -1754,10 +1754,13 @@ struct ToolsSettings: View {
                 Defaults.Toggle(key: .featureAppCleaner) {
                     Text("App cleaner")
                 }
+                Defaults.Toggle(key: .featureTodos) {
+                    Text("To-do list")
+                }
             } header: {
                 Text("Tabs")
             } footer: {
-                Text("The Tools tab holds the quick utilities below. Clipboard history, performance stats and the app cleaner get their own tabs when turned on.")
+                Text("The Tools tab holds the quick utilities below. Clipboard history, performance stats, the app cleaner and the to-do list get their own tabs when turned on.")
             }
 
             Section {

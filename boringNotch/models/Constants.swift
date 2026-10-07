@@ -153,6 +153,7 @@ extension Defaults.Keys {
     static let featureAppCleaner = Key<Bool>("featureAppCleaner", default: false)
     static let featureSpeedTest = Key<Bool>("featureSpeedTest", default: false)
     static let featurePerAppNetwork = Key<Bool>("featurePerAppNetwork", default: false)
+    static let featureTodos = Key<Bool>("featureTodos", default: false)
     static let colorPickerRecent = Key<[String]>("colorPickerRecent", default: [])
     
     // MARK: Gestures
