@@ -1788,6 +1788,16 @@ struct ToolsSettings: View {
             }
 
             Section {
+                Defaults.Toggle(key: .featureVolumeMixer) {
+                    Text("Per-app volume mixer")
+                }
+            } header: {
+                Text("Volume mixer")
+            } footer: {
+                Text("Appears as a tile in the Tools tab. The first time an app is pulled below 100%, macOS asks for the Screen & System Audio Recording permission. Apps left at 100% are never touched.")
+            }
+
+            Section {
                 Defaults.Toggle(key: .featureClipboardHistory) {
                     Text("Clipboard history")
                 }

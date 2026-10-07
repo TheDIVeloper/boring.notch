@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77DF1833341195B7ED1D5830 /* VolumeMixerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785F975BEB4175568C3ADAB6 /* VolumeMixerView.swift */; };
+		BC2185204C9185F573D2A9CC /* VolumeMixerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D21C5C46F6170935A5786C /* VolumeMixerManager.swift */; };
+		CC69BD73C85F7FB2BAC0F21C /* MixerEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72296F898FFBA5A20FC63DF9 /* MixerEngine.swift */; };
 		C0D6AD64E93416F84F2EB16A /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECEE1E3175122A3BD7E1D87 /* TodoListView.swift */; };
 		5114063204C129F70B99230D /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A2FF2EBCF9CF7063904C2D /* TodoManager.swift */; };
 		4BE067404271A4598CA1F0B2 /* PerAppNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB7802A17CED6B3FFEB8AC2 /* PerAppNetworkMonitor.swift */; };
@@ -196,6 +199,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		785F975BEB4175568C3ADAB6 /* VolumeMixerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeMixerView.swift; sourceTree = "<group>"; };
+		E1D21C5C46F6170935A5786C /* VolumeMixerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeMixerManager.swift; sourceTree = "<group>"; };
+		72296F898FFBA5A20FC63DF9 /* MixerEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerEngine.swift; sourceTree = "<group>"; };
 		4ECEE1E3175122A3BD7E1D87 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
 		52A2FF2EBCF9CF7063904C2D /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		0DB7802A17CED6B3FFEB8AC2 /* PerAppNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerAppNetworkMonitor.swift; sourceTree = "<group>"; };
@@ -390,6 +396,9 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				72296F898FFBA5A20FC63DF9 /* MixerEngine.swift */,
+				E1D21C5C46F6170935A5786C /* VolumeMixerManager.swift */,
+				785F975BEB4175568C3ADAB6 /* VolumeMixerView.swift */,
 				52A2FF2EBCF9CF7063904C2D /* TodoManager.swift */,
 				4ECEE1E3175122A3BD7E1D87 /* TodoListView.swift */,
 				2D651608CBCF6A9B955629C5 /* SpeedTestManager.swift */,
@@ -1070,6 +1079,9 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				77DF1833341195B7ED1D5830 /* VolumeMixerView.swift in Sources */,
+				BC2185204C9185F573D2A9CC /* VolumeMixerManager.swift in Sources */,
+				CC69BD73C85F7FB2BAC0F21C /* MixerEngine.swift in Sources */,
 				C0D6AD64E93416F84F2EB16A /* TodoListView.swift in Sources */,
 				5114063204C129F70B99230D /* TodoManager.swift in Sources */,
 				4BE067404271A4598CA1F0B2 /* PerAppNetworkMonitor.swift in Sources */,
@@ -1307,6 +1319,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSBackgroundOnly = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAudioCaptureUsageDescription = "Lets the volume mixer adjust the volume of individual apps.";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "This app uses AppleEvents to control music";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app uses the calendar to display your calendar events";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display a live camera view";
@@ -1361,6 +1374,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSBackgroundOnly = NO;
 				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAudioCaptureUsageDescription = "Lets the volume mixer adjust the volume of individual apps.";
 				INFOPLIST_KEY_NSAppleEventsUsageDescription = "This app uses AppleEvents to control music";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "This app uses the calendar to display your calendar events";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to display a live camera view";

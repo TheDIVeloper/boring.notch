@@ -13,6 +13,7 @@ enum ToolsPage: Equatable {
     case grid
     case eject
     case timer
+    case mixer
 }
 
 struct ToolsView: View {
@@ -31,6 +32,10 @@ struct ToolsView: View {
                 }
             case .timer:
                 TimerPanelView {
+                    page = .grid
+                }
+            case .mixer:
+                VolumeMixerView {
                     page = .grid
                 }
             }
@@ -67,6 +72,11 @@ struct ToolsView: View {
                 if Defaults[.featureColorPicker] {
                     ToolTile(icon: "eyedropper", label: "Pick colour") {
                         picker.pick()
+                    }
+                }
+                if Defaults[.featureVolumeMixer] {
+                    ToolTile(icon: "speaker.wave.3.fill", label: "Mixer") {
+                        page = .mixer
                     }
                 }
             }
@@ -108,6 +118,7 @@ struct ToolsView: View {
     private var hasTiles: Bool {
         Defaults[.featureDiskEject] || Defaults[.featureCaffeinate]
             || Defaults[.featureTimer] || Defaults[.featureColorPicker]
+            || Defaults[.featureVolumeMixer]
     }
 }
 

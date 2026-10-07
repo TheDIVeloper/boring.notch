@@ -154,6 +154,8 @@ extension Defaults.Keys {
     static let featureSpeedTest = Key<Bool>("featureSpeedTest", default: false)
     static let featurePerAppNetwork = Key<Bool>("featurePerAppNetwork", default: false)
     static let featureTodos = Key<Bool>("featureTodos", default: false)
+    static let featureVolumeMixer = Key<Bool>("featureVolumeMixer", default: false)
+    static let mixerAppVolumes = Key<[String: Double]>("mixerAppVolumes", default: [:])
     static let colorPickerRecent = Key<[String]>("colorPickerRecent", default: [])
     
     // MARK: Gestures
