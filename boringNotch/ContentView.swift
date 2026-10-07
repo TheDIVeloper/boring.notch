@@ -380,7 +380,7 @@ struct ContentView: View {
                     case .clipboard:
                         ClipboardHistoryView()
                     case .stats:
-                        Text("Performance stats")
+                        StatsView()
                     }
                 }
                 .transition(

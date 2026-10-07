@@ -92,8 +92,15 @@ final class StatsManager: ObservableObject {
 
         let elapsed = Date().timeIntervalSince(previousSampleDate)
         guard elapsed > 0 else { return }
-        netRxRate = UInt64(Double(bytes.rx &- previous.rx) / elapsed)
-        netTxRate = UInt64(Double(bytes.tx &- previous.tx) / elapsed)
+        netRxRate = wrappedDelta(bytes.rx, previous.rx) / UInt64(elapsed)
+        netTxRate = wrappedDelta(bytes.tx, previous.tx) / UInt64(elapsed)
+    }
+
+    private func wrappedDelta(_ current: UInt64, _ previous: UInt64) -> UInt64 {
+        if current >= previous {
+            return current - previous
+        }
+        return (UInt64(UInt32.max) + 1) - previous + current
     }
 
     private func interfaceByteCounters() -> (rx: UInt64, tx: UInt64)? {
@@ -106,7 +113,7 @@ final class StatsManager: ObservableObject {
         var pointer: UnsafeMutablePointer<ifaddrs>? = first
         while let current = pointer {
             defer { pointer = current.pointee.ifa_next }
-            let flags = current.pointee.ifa_flags
+            let flags = Int32(current.pointee.ifa_flags)
             guard (flags & IFF_UP) != 0, (flags & IFF_LOOPBACK) == 0 else { continue }
             guard let data = current.pointee.ifa_data else { continue }
             let ifinfo = data.assumingMemoryBound(to: if_data.self).pointee
