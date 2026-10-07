@@ -66,7 +66,7 @@ final class PerAppNetworkMonitor: ObservableObject {
         }), let icon = app.icon {
             return icon
         }
-        return NSWorkspace.shared.icon(forFileType: "")
+        return nil
     }
 
     private static func sampleNettop() -> [AppNetworkUsage] {

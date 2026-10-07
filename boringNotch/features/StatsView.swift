@@ -7,6 +7,7 @@
 //
 
 import Darwin
+import Defaults
 import SwiftUI
 
 final class StatsManager: ObservableObject {
@@ -126,9 +127,12 @@ final class StatsManager: ObservableObject {
 
 struct StatsView: View {
     @StateObject private var stats = StatsManager()
+    @ObservedObject private var speedTest = SpeedTestManager.shared
+    @ObservedObject private var network = PerAppNetworkMonitor.shared
 
     var body: some View {
-        VStack(spacing: 12) {
+        ScrollView {
+            VStack(spacing: 12) {
             HStack {
                 Text("Performance")
                     .font(.system(size: 13, weight: .semibold))
@@ -171,12 +175,129 @@ struct StatsView: View {
                 }
                 Spacer()
             }
+
+            if Defaults[.featureSpeedTest] {
+                speedTestSection
+            }
+
+            if Defaults[.featurePerAppNetwork] {
+                perAppSection
+            }
+        }
         }
         .padding(.vertical, 14)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .onAppear { stats.start() }
-        .onDisappear { stats.stop() }
+        .onAppear {
+            stats.start()
+            if Defaults[.featurePerAppNetwork] {
+                network.refresh()
+            }
+        }
+        .onDisappear {
+            stats.stop()
+        }
+    }
+
+    private var speedTestSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Divider().overlay(Color.white.opacity(0.15))
+            HStack {
+                Text("Speed test")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white)
+                Spacer()
+                Button(speedTest.isRunning ? "Running…" : "Run") {
+                    speedTest.run()
+                }
+                .buttonStyle(.borderless)
+                .font(.system(size: 10))
+                .foregroundStyle(speedTest.isRunning ? .gray : .white)
+                .disabled(speedTest.isRunning)
+            }
+
+            if speedTest.phase == .downloading {
+                ProgressView(value: speedTest.progress)
+                    .controlSize(.small)
+                Text("Downloading…")
+                    .font(.system(size: 9))
+                    .foregroundStyle(.gray)
+            } else if speedTest.phase == .uploading {
+                ProgressView()
+                    .controlSize(.small)
+                Text("Uploading…")
+                    .font(.system(size: 9))
+                    .foregroundStyle(.gray)
+            }
+
+            if let down = speedTest.downloadMbps, let up = speedTest.uploadMbps {
+                HStack(spacing: 14) {
+                    Label(String(format: "Down %.1f Mbps", down), systemImage: "arrow.down")
+                    Label(String(format: "Up %.1f Mbps", up), systemImage: "arrow.up")
+                }
+                .font(.system(size: 11))
+                .foregroundStyle(.white)
+            }
+
+            if speedTest.phase == .failed {
+                Text("Speed test failed. Check the connection and try again.")
+                    .font(.system(size: 9))
+                    .foregroundStyle(.red)
+            }
+        }
+    }
+
+    private var perAppSection: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Divider().overlay(Color.white.opacity(0.15))
+            HStack {
+                Text("Top apps by network")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.white)
+                Spacer()
+                Button("Refresh") {
+                    network.refresh()
+                }
+                .buttonStyle(.borderless)
+                .font(.system(size: 10))
+                .foregroundStyle(.gray)
+                .disabled(network.isSampling)
+            }
+
+            Text("Totals since each app started")
+                .font(.system(size: 9))
+                .foregroundStyle(.gray)
+
+            if network.isSampling && network.usages.isEmpty {
+                ProgressView()
+                    .controlSize(.small)
+                    .padding(.vertical, 6)
+            } else if network.usages.isEmpty {
+                Text("No per-app counters yet")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.gray)
+                    .padding(.vertical, 4)
+            } else {
+                ForEach(network.usages) { usage in
+                    HStack(spacing: 8) {
+                        if let icon = usage.icon {
+                            Image(nsImage: icon)
+                                .resizable()
+                                .frame(width: 14, height: 14)
+                        }
+                        Text(usage.name)
+                            .font(.system(size: 10))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                        Spacer()
+                        Label(byteString(usage.rxBytes), systemImage: "arrow.down")
+                        Label(byteString(usage.txBytes), systemImage: "arrow.up")
+                    }
+                    .font(.system(size: 9))
+                    .foregroundStyle(.gray)
+                }
+            }
+        }
     }
 
     private func statRow(icon: String, label: String, value: String, fraction: Double) -> some View {
@@ -207,5 +328,9 @@ struct StatsView: View {
         let formatter = ByteCountFormatter()
         formatter.countStyle = .file
         return formatter.string(fromByteCount: Int64(bytes))
+    }
+
+    private func byteString(_ bytes: Int64) -> String {
+        byteString(UInt64(clamping: bytes))
     }
 }

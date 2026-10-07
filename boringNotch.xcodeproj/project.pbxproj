@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BE067404271A4598CA1F0B2 /* PerAppNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB7802A17CED6B3FFEB8AC2 /* PerAppNetworkMonitor.swift */; };
+		0751C99BB97B194BED4EB394 /* SpeedTestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D651608CBCF6A9B955629C5 /* SpeedTestManager.swift */; };
 		F0321BFB88C962E6DF96EC19 /* AppCleanerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */; };
 		5C4BC303E378150FB327A240 /* AppCleanerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3305137C4684C9948106D0C /* AppCleanerManager.swift */; };
 		BABE848200024B980DC9779C /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D444E9D4A9B5C0CA800943C9 /* StatsView.swift */; };
@@ -192,6 +194,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0DB7802A17CED6B3FFEB8AC2 /* PerAppNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerAppNetworkMonitor.swift; sourceTree = "<group>"; };
+		2D651608CBCF6A9B955629C5 /* SpeedTestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTestManager.swift; sourceTree = "<group>"; };
 		B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleanerView.swift; sourceTree = "<group>"; };
 		E3305137C4684C9948106D0C /* AppCleanerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCleanerManager.swift; sourceTree = "<group>"; };
 		D444E9D4A9B5C0CA800943C9 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				2D651608CBCF6A9B955629C5 /* SpeedTestManager.swift */,
+				0DB7802A17CED6B3FFEB8AC2 /* PerAppNetworkMonitor.swift */,
 				E3305137C4684C9948106D0C /* AppCleanerManager.swift */,
 				B3D0EFDBC3C5B9E01D4A4E92 /* AppCleanerView.swift */,
 				D444E9D4A9B5C0CA800943C9 /* StatsView.swift */,
@@ -1058,6 +1064,8 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				4BE067404271A4598CA1F0B2 /* PerAppNetworkMonitor.swift in Sources */,
+				0751C99BB97B194BED4EB394 /* SpeedTestManager.swift in Sources */,
 				F0321BFB88C962E6DF96EC19 /* AppCleanerView.swift in Sources */,
 				5C4BC303E378150FB327A240 /* AppCleanerManager.swift in Sources */,
 				BABE848200024B980DC9779C /* StatsView.swift in Sources */,

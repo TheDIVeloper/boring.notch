@@ -1803,6 +1803,19 @@ struct ToolsSettings: View {
             } footer: {
                 Text("Polls CPU, memory and network usage while the Stats tab is open.")
             }
+
+            Section {
+                Defaults.Toggle(key: .featureSpeedTest) {
+                    Text("Network speed test")
+                }
+                Defaults.Toggle(key: .featurePerAppNetwork) {
+                    Text("Per-app network usage")
+                }
+            } header: {
+                Text("Network extras")
+            } footer: {
+                Text("Both sections appear inside the Stats tab. Per-app totals are read from the system's own counters via nettop and show totals since each app started.")
+            }
         }
         .navigationTitle("Tools")
     }

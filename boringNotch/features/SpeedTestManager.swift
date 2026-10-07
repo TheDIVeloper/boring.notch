@@ -62,15 +62,17 @@ final class SpeedTestManager: ObservableObject {
         var received = 0
 
         do {
-            let (response, stream) = try await URLSession.shared.bytes(for: URLRequest(url: url))
+            let (stream, response) = try await URLSession.shared.bytes(for: URLRequest(url: url))
             guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
                 await MainActor.run { self.phase = .failed }
                 return
             }
-            for try await chunk in stream {
-                received += chunk.count
-                let fraction = Double(received) / Double(downloadBytes)
-                await MainActor.run { self.progress = min(fraction, 1.0) }
+            for try await _ in stream {
+                received += 1
+                if received % 250_000 == 0 {
+                    let fraction = Double(received) / Double(downloadBytes)
+                    await MainActor.run { self.progress = min(fraction, 1.0) }
+                }
             }
             let elapsed = max(Date().timeIntervalSince(start), 0.001)
             let mbps = Double(received) * 8.0 / elapsed / 1_000_000.0
