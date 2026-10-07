@@ -17,6 +17,7 @@ enum ToolsPage: Equatable {
 
 struct ToolsView: View {
     @State private var page: ToolsPage = .grid
+    @StateObject private var caffeinate = CaffeinateManager.shared
 
     var body: some View {
         Group {
@@ -51,7 +52,9 @@ struct ToolsView: View {
                     }
                 }
                 if Defaults[.featureCaffeinate] {
-                    ToolTile(icon: "cup.and.saucer.fill", label: "Caffeinate") {}
+                    ToolTile(icon: "cup.and.saucer.fill", label: caffeinate.isOn ? "Awake" : "Caffeinate", active: caffeinate.isOn) {
+                        caffeinate.toggle()
+                    }
                 }
                 if Defaults[.featureTimer] {
                     ToolTile(icon: "timer", label: "Timer") {

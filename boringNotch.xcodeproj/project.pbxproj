@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9671F89737B85BDFF575233 /* CaffeinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */; };
 		D0DF7D21C2D413C5672EFB0A /* DiskEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */; };
 		533F350D523BDCA96D6D4C89 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */; };
 		1100290C2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1100290B2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift */; };
@@ -183,6 +184,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeinateManager.swift; sourceTree = "<group>"; };
 		66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskEjectView.swift; sourceTree = "<group>"; };
 		7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		1100290B2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+LoadHelpers.swift"; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */,
 				66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */,
 				7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */,
 			);
@@ -1031,6 +1034,7 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				D9671F89737B85BDFF575233 /* CaffeinateManager.swift in Sources */,
 				D0DF7D21C2D413C5672EFB0A /* DiskEjectView.swift in Sources */,
 				533F350D523BDCA96D6D4C89 /* ToolsView.swift in Sources */,
 				1100290C2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift in Sources */,

@@ -1761,9 +1761,6 @@ struct ToolsSettings: View {
                 Defaults.Toggle(key: .featureDiskEject) {
                     Text("Disk eject")
                 }
-                Defaults.Toggle(key: .featureCaffeinate) {
-                    Text("Caffeinate")
-                }
                 Defaults.Toggle(key: .featureTimer) {
                     Text("Timer and stopwatch")
                 }
@@ -1772,6 +1769,16 @@ struct ToolsSettings: View {
                 }
             } header: {
                 Text("Tool tiles")
+            }
+
+            Section {
+                Defaults.Toggle(key: .featureCaffeinate) {
+                    Text("Caffeinate")
+                }
+            } header: {
+                Text("Caffeinate")
+            } footer: {
+                Text("Holds a power assertion while it is on, so the Mac will not idle to sleep. The display may still sleep. Keeping the Mac awake with the lid closed is not possible without an administrator helper.")
             }
 
             Section {
