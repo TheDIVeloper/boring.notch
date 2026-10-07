@@ -24,7 +24,9 @@ struct ToolsView: View {
             case .grid:
                 grid
             case .eject:
-                Text("Eject panel")
+                DiskEjectView {
+                    page = .grid
+                }
             case .timer:
                 Text("Timer panel")
             }

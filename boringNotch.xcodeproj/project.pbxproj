@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0DF7D21C2D413C5672EFB0A /* DiskEjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */; };
 		533F350D523BDCA96D6D4C89 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */; };
 		1100290C2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1100290B2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift */; };
 		110029272E84FD4C00035A57 /* TemporaryFileStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110029262E84FD4C00035A57 /* TemporaryFileStorageService.swift */; };
@@ -182,6 +183,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskEjectView.swift; sourceTree = "<group>"; };
 		7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		1100290B2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSItemProvider+LoadHelpers.swift"; sourceTree = "<group>"; };
 		110029262E84FD4C00035A57 /* TemporaryFileStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryFileStorageService.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				66C2619CB7C9FAC8469C58CB /* DiskEjectView.swift */,
 				7CC1DFC0382D6C5705DFE56A /* ToolsView.swift */,
 			);
 			path = features;
@@ -1028,6 +1031,7 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				D0DF7D21C2D413C5672EFB0A /* DiskEjectView.swift in Sources */,
 				533F350D523BDCA96D6D4C89 /* ToolsView.swift in Sources */,
 				1100290C2E847E2800035A57 /* NSItemProvider+LoadHelpers.swift in Sources */,
 				11CFC6632E09918400748C80 /* MusicControllerSelectionView.swift in Sources */,
