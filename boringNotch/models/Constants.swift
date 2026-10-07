@@ -68,6 +68,29 @@ enum OptionKeyAction: String, CaseIterable, Identifiable, Defaults.Serializable 
     var id: String { self.rawValue }
 }
 
+// Background theme for the open notch. The closed notch always stays black
+// so it blends with the hardware notch.
+enum NotchThemeEnum: String, CaseIterable, Identifiable, Defaults.Serializable {
+    case classic = "Classic black"
+    case liquidGlass = "Liquid glass"
+    case custom = "Custom colour"
+
+    var id: String { self.rawValue }
+
+    var label: String { rawValue }
+
+    var footer: String {
+        switch self {
+        case .classic:
+            return "The original look: a solid black notch."
+        case .liquidGlass:
+            return "Uses the system Liquid Glass material on macOS 26 and later, and a blurred material on earlier systems. The desktop shows through."
+        case .custom:
+            return "Fills the open notch with any colour you pick. The closed notch stays black so it blends with the hardware notch."
+        }
+    }
+}
+
 extension Defaults.Keys {
     // MARK: General
     static let menubarIcon = Key<Bool>("menubarIcon", default: true)
@@ -95,6 +118,8 @@ extension Defaults.Keys {
     static let hideFromScreenRecording = Key<Bool>("hideFromScreenRecording", default: false)
     
     // MARK: Appearance
+    static let notchTheme = Key<NotchThemeEnum>("notchTheme", default: .classic)
+    static let notchCustomColourData = Key<Data?>("notchCustomColourData", default: nil)
     static let showEmojis = Key<Bool>("showEmojis", default: false)
     //static let alwaysShowTabs = Key<Bool>("alwaysShowTabs", default: true)
     static let showMirror = Key<Bool>("showMirror", default: false)

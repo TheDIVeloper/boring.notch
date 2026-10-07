@@ -58,6 +58,23 @@ struct ContentView: View {
         )
     }
 
+    // Solid fill for the notch while closed (always black) or open (current theme).
+    private var notchFillColour: Color {
+        vm.notchState == .open ? Color.notchFill : .black
+    }
+
+    // Material backdrop for the liquid glass theme on the open notch.
+    @ViewBuilder
+    private var liquidGlassBackground: some View {
+        if #available(macOS 26.0, *) {
+            Rectangle()
+                .fill(.clear)
+                .glassEffect(.regular, in: Rectangle())
+        } else {
+            VisualEffectView(material: .hudWindow, blendingMode: .behindWindow)
+        }
+    }
+
     private var computedChinWidth: CGFloat {
         var chinWidth: CGFloat = vm.closedNotchSize.width
 
@@ -100,11 +117,17 @@ struct ContentView: View {
                         : cornerRadiusInsets.closed.bottom
                     )
                     .padding([.horizontal, .bottom], vm.notchState == .open ? 12 : 0)
-                    .background(.black)
+                    .background {
+                        if vm.notchState == .open, Defaults[.notchTheme] == .liquidGlass {
+                            liquidGlassBackground
+                        } else {
+                            notchFillColour
+                        }
+                    }
                     .clipShape(currentNotchShape)
                     .overlay(alignment: .top) {
                         Rectangle()
-                            .fill(.black)
+                            .fill(notchFillColour)
                             .frame(height: 1)
                             .padding(.horizontal, topCornerRadius)
                     }

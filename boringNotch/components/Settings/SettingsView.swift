@@ -1119,7 +1119,9 @@ struct Appearance: View {
     @Default(.useMusicVisualizer) var useMusicVisualizer
     @Default(.customVisualizers) var customVisualizers
     @Default(.selectedVisualizer) var selectedVisualizer
+    @Default(.notchTheme) var notchTheme
 
+    @State private var notchColour: Color = .black
     @State private var selectedListVisualizer: CustomVisualizer? = nil
     @State private var isPresented: Bool = false
     @State private var name: String = ""
@@ -1135,6 +1137,34 @@ struct Appearance: View {
 
             } header: {
                 Text("General")
+            }
+
+            Section {
+                Picker("Notch background", selection: $notchTheme) {
+                    ForEach(NotchThemeEnum.allCases) { theme in
+                        Text(theme.label).tag(theme)
+                    }
+                }
+                if notchTheme == .custom {
+                    ColorPicker("Background colour", selection: $notchColour, supportsOpacity: false)
+                        .onChange(of: notchColour) { _, newColour in
+                            if let data = try? NSKeyedArchiver.archivedData(
+                                withRootObject: NSColor(newColour), requiringSecureCoding: false) {
+                                Defaults[.notchCustomColourData] = data
+                            }
+                        }
+                }
+            } header: {
+                Text("Theme")
+            } footer: {
+                Text(notchTheme.footer)
+                    .foregroundStyle(.secondary)
+            }
+            .onAppear {
+                if let data = Defaults[.notchCustomColourData],
+                   let nsColour = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) {
+                    notchColour = Color(nsColor: nsColour)
+                }
             }
 
             Section {
