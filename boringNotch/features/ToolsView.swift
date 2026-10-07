@@ -30,7 +30,9 @@ struct ToolsView: View {
                     page = .grid
                 }
             case .timer:
-                Text("Timer panel")
+                TimerPanelView {
+                    page = .grid
+                }
             }
         }
         .padding(.vertical, 14)

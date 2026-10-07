@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55CD7C41F8640CA8BAF2517B /* TimerPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */; };
+		2D6ED8788064044D033F882A /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38569EE316732A24EE51CA6C /* TimerManager.swift */; };
 		B297094BE503BD28C8A20564 /* ColorPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */; };
 		29D188922891DCF7E53798E8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */; };
 		2BFCC7773DE8535B406B5912 /* ClipboardHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */; };
@@ -187,6 +189,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPanelView.swift; sourceTree = "<group>"; };
+		38569EE316732A24EE51CA6C /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerManager.swift; sourceTree = "<group>"; };
 		890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryView.swift; sourceTree = "<group>"; };
 		4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryManager.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				38569EE316732A24EE51CA6C /* TimerManager.swift */,
+				8989B2E80CCB1C0A94344D2B /* TimerPanelView.swift */,
 				02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */,
 				4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */,
 				890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */,
@@ -1043,6 +1049,8 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				55CD7C41F8640CA8BAF2517B /* TimerPanelView.swift in Sources */,
+				2D6ED8788064044D033F882A /* TimerManager.swift in Sources */,
 				B297094BE503BD28C8A20564 /* ColorPickerManager.swift in Sources */,
 				29D188922891DCF7E53798E8 /* ClipboardHistoryView.swift in Sources */,
 				2BFCC7773DE8535B406B5912 /* ClipboardHistoryManager.swift in Sources */,

@@ -1,0 +1,204 @@
+//
+//  StatsView.swift
+//  boringNotch
+//
+//  Tools: performance stats tab. Polls CPU, memory and network once a
+//  second while the tab is visible, so it costs nothing when closed.
+//
+
+import Darwin
+import SwiftUI
+
+final class StatsManager: ObservableObject {
+    @Published var cpuUsage: Double = 0
+    @Published var memoryUsed: UInt64 = 0
+    @Published var memoryTotal: UInt64 = ProcessInfo.processInfo.physicalMemory
+    @Published var netRxRate: UInt64 = 0
+    @Published var netTxRate: UInt64 = 0
+
+    private var timer: Timer?
+    private var previousTicks: (user: UInt32, system: UInt32, idle: UInt32, nice: UInt32)?
+    private var previousBytes: (rx: UInt64, tx: UInt64)?
+    private var previousSampleDate = Date()
+
+    func start() {
+        guard timer == nil else { return }
+        sample()
+        let timer = Timer(timeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.sample()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
+    }
+
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+        previousTicks = nil
+        previousBytes = nil
+    }
+
+    private func sample() {
+        sampleCPU()
+        sampleMemory()
+        sampleNetwork()
+        previousSampleDate = Date()
+    }
+
+    private func sampleCPU() {
+        var size = mach_msg_type_number_t(MemoryLayout<host_cpu_load_info_data_t>.size / MemoryLayout<integer_t>.size)
+        var info = host_cpu_load_info()
+        let result = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(size)) {
+                host_statistics(mach_host_self(), HOST_CPU_LOAD_INFO, $0, &size)
+            }
+        }
+        guard result == KERN_SUCCESS else { return }
+        let ticks = (user: info.cpu_ticks.0, system: info.cpu_ticks.1, idle: info.cpu_ticks.2, nice: info.cpu_ticks.3)
+        defer { previousTicks = ticks }
+        guard let previous = previousTicks else { return }
+
+        let userDelta = Double(ticks.user &- previous.user)
+        let systemDelta = Double(ticks.system &- previous.system)
+        let niceDelta = Double(ticks.nice &- previous.nice)
+        let idleDelta = Double(ticks.idle &- previous.idle)
+        let busy = userDelta + systemDelta + niceDelta
+        let total = busy + idleDelta
+        if total > 0 {
+            cpuUsage = busy / total * 100.0
+        }
+    }
+
+    private func sampleMemory() {
+        var size = mach_msg_type_number_t(MemoryLayout<vm_statistics64_data_t>.size / MemoryLayout<integer_t>.size)
+        var stats = vm_statistics64()
+        let result = withUnsafeMutablePointer(to: &stats) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: Int(size)) {
+                host_statistics64(mach_host_self(), HOST_VM_INFO64, $0, &size)
+            }
+        }
+        guard result == KERN_SUCCESS else { return }
+        let pageSize = UInt64(vm_kernel_page_size)
+        memoryUsed = (UInt64(stats.active_count)
+            + UInt64(stats.wire_count)
+            + UInt64(stats.compressor_page_count)) * pageSize
+        memoryTotal = ProcessInfo.processInfo.physicalMemory
+    }
+
+    private func sampleNetwork() {
+        guard let bytes = interfaceByteCounters() else { return }
+        defer { previousBytes = bytes }
+        guard let previous = previousBytes else { return }
+
+        let elapsed = Date().timeIntervalSince(previousSampleDate)
+        guard elapsed > 0 else { return }
+        netRxRate = UInt64(Double(bytes.rx &- previous.rx) / elapsed)
+        netTxRate = UInt64(Double(bytes.tx &- previous.tx) / elapsed)
+    }
+
+    private func interfaceByteCounters() -> (rx: UInt64, tx: UInt64)? {
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0, let first = ifaddr else { return nil }
+        defer { freeifaddrs(ifaddr) }
+
+        var rx: UInt64 = 0
+        var tx: UInt64 = 0
+        var pointer: UnsafeMutablePointer<ifaddrs>? = first
+        while let current = pointer {
+            defer { pointer = current.pointee.ifa_next }
+            let flags = current.pointee.ifa_flags
+            guard (flags & IFF_UP) != 0, (flags & IFF_LOOPBACK) == 0 else { continue }
+            guard let data = current.pointee.ifa_data else { continue }
+            let ifinfo = data.assumingMemoryBound(to: if_data.self).pointee
+            rx += UInt64(ifinfo.ifi_ibytes)
+            tx += UInt64(ifinfo.ifi_obytes)
+        }
+        return (rx, tx)
+    }
+}
+
+struct StatsView: View {
+    @StateObject private var stats = StatsManager()
+
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack {
+                Text("Performance")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.white)
+                Spacer()
+            }
+
+            statRow(
+                icon: "gauge.with.dots.needle.50percent",
+                label: "CPU",
+                value: String(format: "%.0f%%", stats.cpuUsage),
+                fraction: stats.cpuUsage / 100.0
+            )
+
+            statRow(
+                icon: "memorychip",
+                label: "Memory",
+                value: "\(byteString(stats.memoryUsed)) of \(byteString(stats.memoryTotal))",
+                fraction: stats.memoryTotal > 0 ? Double(stats.memoryUsed) / Double(stats.memoryTotal) : 0
+            )
+
+            HStack(spacing: 8) {
+                Label {
+                    Text("Down \(byteString(stats.netRxRate))/s")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.gray)
+                } icon: {
+                    Image(systemName: "arrow.down")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.green)
+                }
+                Label {
+                    Text("Up \(byteString(stats.netTxRate))/s")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.gray)
+                } icon: {
+                    Image(systemName: "arrow.up")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.orange)
+                }
+                Spacer()
+            }
+        }
+        .padding(.vertical, 14)
+        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .onAppear { stats.start() }
+        .onDisappear { stats.stop() }
+    }
+
+    private func statRow(icon: String, label: String, value: String, fraction: Double) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Label(label, systemImage: icon)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.gray)
+                Spacer()
+                Text(value)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.white)
+            }
+            GeometryReader { proxy in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(Color.white.opacity(0.1))
+                    Capsule()
+                        .fill(fraction > 0.8 ? Color.orange : Color.green)
+                        .frame(width: max(4, proxy.size.width * min(fraction, 1.0)))
+                }
+            }
+            .frame(height: 5)
+        }
+    }
+
+    private func byteString(_ bytes: UInt64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: Int64(bytes))
+    }
+}
