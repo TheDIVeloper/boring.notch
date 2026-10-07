@@ -18,6 +18,7 @@ enum ToolsPage: Equatable {
 struct ToolsView: View {
     @State private var page: ToolsPage = .grid
     @StateObject private var caffeinate = CaffeinateManager.shared
+    @StateObject private var picker = ColorPickerManager.shared
 
     var body: some View {
         Group {
@@ -62,7 +63,33 @@ struct ToolsView: View {
                     }
                 }
                 if Defaults[.featureColorPicker] {
-                    ToolTile(icon: "eyedropper", label: "Pick colour") {}
+                    ToolTile(icon: "eyedropper", label: "Pick colour") {
+                        picker.pick()
+                    }
+                }
+            }
+
+            if Defaults[.featureColorPicker] && !picker.recent.isEmpty {
+                HStack(spacing: 6) {
+                    ForEach(picker.recent, id: \.self) { hex in
+                        Button {
+                            picker.copy(hex)
+                        } label: {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(picker.colour(from: hex))
+                                .frame(width: 18, height: 18)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .stroke(Color.white.opacity(0.25))
+                                }
+                        }
+                        .buttonStyle(.plain)
+                        .help("\(hex), click to copy")
+                    }
+                    Spacer()
+                    Text("recent, click to copy")
+                        .font(.system(size: 9))
+                        .foregroundStyle(.gray)
                 }
             }
 

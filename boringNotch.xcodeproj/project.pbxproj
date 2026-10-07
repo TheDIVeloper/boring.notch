@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B297094BE503BD28C8A20564 /* ColorPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */; };
 		29D188922891DCF7E53798E8 /* ClipboardHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */; };
 		2BFCC7773DE8535B406B5912 /* ClipboardHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */; };
 		D9671F89737B85BDFF575233 /* CaffeinateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */; };
@@ -186,6 +187,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerManager.swift; sourceTree = "<group>"; };
 		890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryView.swift; sourceTree = "<group>"; };
 		4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardHistoryManager.swift; sourceTree = "<group>"; };
 		927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeinateManager.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 		45B58AB3ABAD1A1213A89461 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				02CAD01A3E2701EE9F7D56ED /* ColorPickerManager.swift */,
 				4E74BEFBD00BA521FB7CA4CA /* ClipboardHistoryManager.swift */,
 				890EDB64E0ED5B623D76D5BC /* ClipboardHistoryView.swift */,
 				927B665B6A4BBB5CFDC92779 /* CaffeinateManager.swift */,
@@ -1040,6 +1043,7 @@
 				14288E0C2C6F8EC000B9F80C /* AppIcons.swift in Sources */,
 				B1C448982C972CC4001F0858 /* ListItemPopover.swift in Sources */,
 				B19016242CC15B5000E3F12E /* Constants.swift in Sources */,
+				B297094BE503BD28C8A20564 /* ColorPickerManager.swift in Sources */,
 				29D188922891DCF7E53798E8 /* ClipboardHistoryView.swift in Sources */,
 				2BFCC7773DE8535B406B5912 /* ClipboardHistoryManager.swift in Sources */,
 				D9671F89737B85BDFF575233 /* CaffeinateManager.swift in Sources */,

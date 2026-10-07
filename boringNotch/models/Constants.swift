@@ -150,6 +150,7 @@ extension Defaults.Keys {
     static let featureColorPicker = Key<Bool>("featureColorPicker", default: true)
     static let featureClipboardHistory = Key<Bool>("featureClipboardHistory", default: false)
     static let featurePerformanceStats = Key<Bool>("featurePerformanceStats", default: false)
+    static let colorPickerRecent = Key<[String]>("colorPickerRecent", default: [])
     
     // MARK: Gestures
     static let enableGestures = Key<Bool>("enableGestures", default: true)
