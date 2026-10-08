@@ -132,7 +132,8 @@ struct DiskEjectView: View {
                     .lineLimit(2)
             }
         }
-        .padding(.vertical, 14)
+        .padding(.top, 14)
+        .padding(.bottom, 26)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear { model.refresh() }

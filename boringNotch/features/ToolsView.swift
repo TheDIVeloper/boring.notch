@@ -40,7 +40,8 @@ struct ToolsView: View {
                 }
             }
         }
-        .padding(.vertical, 14)
+        .padding(.top, 14)
+        .padding(.bottom, 26)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity)
         .animation(.smooth(duration: 0.25), value: page)

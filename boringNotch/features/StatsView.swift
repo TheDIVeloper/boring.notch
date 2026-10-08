@@ -92,9 +92,9 @@ final class StatsManager: ObservableObject {
         guard let previous = previousBytes else { return }
 
         let elapsed = Date().timeIntervalSince(previousSampleDate)
-        guard elapsed > 0 else { return }
-        netRxRate = wrappedDelta(bytes.rx, previous.rx) / UInt64(elapsed)
-        netTxRate = wrappedDelta(bytes.tx, previous.tx) / UInt64(elapsed)
+        guard elapsed >= 0.5 else { return }
+        netRxRate = UInt64(Double(wrappedDelta(bytes.rx, previous.rx)) / elapsed)
+        netTxRate = UInt64(Double(wrappedDelta(bytes.tx, previous.tx)) / elapsed)
     }
 
     private func wrappedDelta(_ current: UInt64, _ previous: UInt64) -> UInt64 {
@@ -185,7 +185,8 @@ struct StatsView: View {
             }
         }
         }
-        .padding(.vertical, 14)
+        .padding(.top, 10)
+        .padding(.bottom, 20)
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
