@@ -547,7 +547,11 @@ struct ContentView: View {
     // MARK: - Hover Management
 
     private func handleHover(_ hovering: Bool) {
-        if coordinator.firstLaunch { return }
+        // Do not let an unfinished onboarding silently disable hover forever.
+        // Only skip while the onboarding window is actually on screen.
+        let onboardingVisible = NSApp.windows.contains { $0.identifier?.rawValue == "OnboardingWindow" }
+        if onboardingVisible { return }
+
         hoverTask?.cancel()
         
         if hovering {
