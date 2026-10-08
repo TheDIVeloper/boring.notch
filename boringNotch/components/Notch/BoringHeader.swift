@@ -23,9 +23,11 @@ struct BoringHeader: View {
             .blur(radius: vm.notchState == .closed ? 20 : 0)
             .zIndex(2)
 
-            if vm.notchState == .open {
+            if vm.notchState == .open,
+                let screen = NSScreen.screen(withUUID: coordinator.selectedScreenUUID),
+                screen.safeAreaInsets.top > 0 {
                 Rectangle()
-                    .fill(NSScreen.screen(withUUID: coordinator.selectedScreenUUID)?.safeAreaInsets.top ?? 0 > 0 ? .black : .clear)
+                    .fill(.black)
                     .frame(width: vm.closedNotchSize.width)
                     .mask {
                         NotchShape()
@@ -89,7 +91,6 @@ struct BoringHeader: View {
                 }
             }
             .font(.system(.headline, design: .rounded))
-            .frame(maxWidth: .infinity, alignment: .trailing)
             .opacity(vm.notchState == .closed ? 0 : 1)
             .blur(radius: vm.notchState == .closed ? 20 : 0)
             .zIndex(2)
